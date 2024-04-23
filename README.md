@@ -80,6 +80,6 @@ Start Neovim
 nvim
 ```
 
-That's it! Lazy will install some plugins. Use `:Lazy` to view
+That's it! Lazy will install some plugin. Use `:Lazy` to view
 current plugin status. Hit `q` to close the window.
 
