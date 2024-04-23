@@ -53,10 +53,8 @@ return { -- Fuzzy Finder (files, lsp, etc)
 			--  All the info you're looking for is in `:help telescope.setup()`
 			--
 			defaults = {
-				-- winblend = 10,
+				winblend = 10,
 				inblend = 10,
-				prompt_prefix = icons.ui.Telescope .. " ",
-				selection_caret = icons.ui.Forward .. " ",
 				borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
 				mappings = {
 					i = {
