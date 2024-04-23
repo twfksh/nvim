@@ -3,6 +3,7 @@ local nnoremap = require("toufiq.keymap_utils").nnoremap
 -- General keymaps
 nnoremap("-", vim.cmd.Ex, { desc = "Reveal netrw file/directory explorer" })
 nnoremap("<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search hl on pressing <Esc> in normal mode" })
+nnoremap(";", ":", { desc = "Enter command mone" })
 
 -- Diagnostic keymaps
 nnoremap("[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
