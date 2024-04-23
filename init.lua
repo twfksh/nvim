@@ -10,7 +10,7 @@
 -- Disable builtin plugins that I dont use
 require("toufiq7r.disable_builtin")
 
--- NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
+-- Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
