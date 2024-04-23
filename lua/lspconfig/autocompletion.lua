@@ -38,7 +38,7 @@ function M.config()
 		return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
 	end
 
-	local icons = require("toufiq.icons")
+	local icons = require("toufiq7r.icons")
 
 	cmp.setup({
 		snippet = {

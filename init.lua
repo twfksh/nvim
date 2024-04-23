@@ -8,7 +8,7 @@
 ---------------------------------------------------
 
 -- Disable builtin plugins that I dont use
-require("toufiq.disable_builtin")
+require("toufiq7r.disable_builtin")
 
 -- NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = " "
@@ -26,8 +26,10 @@ vim.opt.rtp:prepend(lazypath)
 
 -- [[ Configure and install plugins ]] --
 require("lazy").setup({
-	{ import = "plugins" },
 	{ import = "lspconfig" },
+	-- { import = "lspconfig.optional" }, -- Uncomment for optional lspconfig
+	{ import = "plugins" },
+	-- { import = "plugins.optional" }, -- Uncomment for optional plugins
 }, {
 	change_detection = {
 		enabled = true,

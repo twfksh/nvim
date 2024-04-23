@@ -42,8 +42,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 		-- Telescope picker. This is really useful to discover what Telescope can
 		-- do as well as how to actually do it!
 
-		-- load necessary icons
-		local icons = require("toufiq.icons")
+		-- Useful for creating key mappings
 		local actions = require("telescope.actions")
 
 		-- [[ Configure Telescope ]]
