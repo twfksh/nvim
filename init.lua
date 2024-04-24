@@ -7,33 +7,48 @@
 --                            /_/                --
 ---------------------------------------------------
 
--- Disable builtin plugins that I dont use
-require("toufiq7r.disable_builtin")
+-- builtin plugins I dont use
+require "toufiq7r.disable_builtin"
 
--- Must happen before plugins are loaded (otherwise wrong leader will be used)
+-- must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 vim.g.have_nerd_font = true
 
--- [[ Install `lazy.nvim` plugin manager ]] --
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+-- plugins specification table
+local LAZY_PLUGIN_SPEC = {}
+
+local function include_spec(item)
+  table.insert(LAZY_PLUGIN_SPEC, { import = item })
+end
+
+-- include plugins
+include_spec("lspconfig")
+-- include_spec("lspconfig.optional")
+include_spec("plugins")
+-- include_spec("plugins.optional")
+
+-- Install and configure `lazy.nvim` plugin manager
+local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-	vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-end ---@diagnostic disable-next-line: undefined-field
+  vim.fn.system {
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
+    lazypath,
+  }
+
+end
 vim.opt.rtp:prepend(lazypath)
 
--- [[ Configure and install plugins ]] --
-require("lazy").setup({
-	{ import = "lspconfig" },
-	-- { import = "lspconfig.optional" }, -- Uncomment for optional lspconfig
-	{ import = "plugins" },
-	-- { import = "plugins.optional" }, -- Uncomment for optional plugins
-}, {
-	change_detection = {
-		enabled = true,
-		notify = false,
-	},
-	ui = { border = "single" },
-})
+require("lazy").setup {
+  spec = LAZY_PLUGIN_SPEC,
+  ui = { border = "single" },
+  change_detection = {
+    enabled = true,
+    notify = false,
+  },
+}
