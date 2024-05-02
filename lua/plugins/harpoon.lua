@@ -6,7 +6,7 @@ local M = {
 
 M.config = function()
 	local harpoon = require("harpoon")
-	local nnoremap = require("toufiq7r.keymap_utils").nnoremap
+	local nnoremap = require("config.keymap_utils").nnoremap
 
 	harpoon:setup()
 

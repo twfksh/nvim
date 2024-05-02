@@ -38,7 +38,7 @@ function M.config()
 		return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
 	end
 
-	local icons = require("toufiq7r.icons")
+	-- local icons = require("config.icons")
 
 	cmp.setup({
 		snippet = {
@@ -71,7 +71,7 @@ function M.config()
 					luasnip.expand_or_jump()
 				elseif check_backspace() then
 					fallback()
-				-- require("neotab").tabout()
+					-- require("neotab").tabout()
 				else
 					fallback()
 					-- require("neotab").tabout()
@@ -93,32 +93,6 @@ function M.config()
 				"s",
 			}),
 		}),
-		formatting = {
-			fields = { "kind", "abbr", "menu" },
-			format = function(entry, vim_item)
-				vim_item.kind = icons.kind[vim_item.kind]
-				vim_item.menu = ({
-					nvim_lsp = "",
-					nvim_lua = "",
-					luasnip = "",
-					buffer = "",
-					path = "",
-					emoji = "",
-				})[entry.source.name]
-
-				if entry.source.name == "emoji" then
-					vim_item.kind = icons.misc.Smiley
-					vim_item.kind_hl_group = "CmpItemKindEmoji"
-				end
-
-				-- if entry.source.name == "cmp_tabnine" then
-				-- 	vim_item.kind = icons.misc.Robot
-				-- 	vim_item.kind_hl_group = "CmpItemKindTabnine"
-				-- end
-
-				return vim_item
-			end,
-		},
 		sources = {
 			-- { name = "copilot" },
 			{ name = "nvim_lsp" },

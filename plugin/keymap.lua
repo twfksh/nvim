@@ -1,4 +1,4 @@
-local nnoremap = require("toufiq7r.keymap_utils").nnoremap
+local nnoremap = require("config.keymap_utils").nnoremap
 
 -- General keymaps
 nnoremap("-", vim.cmd.Ex, { desc = "Reveal netrw file/directory explorer" })

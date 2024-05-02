@@ -65,11 +65,11 @@ M.config = function()
 
 	local servers = {
 		clangd = {},
-		gopls = {},
+		-- gopls = {},
 		pyright = {},
 		black = {},
 		isort = {},
-		rust_analyzer = {},
+		-- rust_analyzer = {},
 		-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
 		--
 		-- Some languages (like typescript) have entire language plugins that can be useful:
@@ -95,11 +95,7 @@ M.config = function()
 		},
 	}
 
-	require("mason").setup({
-		ui = {
-			border = "single",
-		},
-	})
+	require("mason").setup({})
 
 	local ensure_installed = vim.tbl_keys(servers or {})
 	vim.list_extend(ensure_installed, {

@@ -14,7 +14,7 @@ vim.opt.mouse = "a"
 
 vim.opt.showmode = false
 
--- vim.opt.clipboard = "unnamed,unnamedplus"
+vim.opt.clipboard = "unnamed,unnamedplus"
 
 vim.opt.swapfile = false
 vim.opt.backup = false
