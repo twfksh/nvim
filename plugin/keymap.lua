@@ -1,9 +1,11 @@
 local nnoremap = require("config.keymap_utils").nnoremap
+local inoremap = require("config.keymap_utils").inoremap
 
 -- General keymaps
 nnoremap("-", vim.cmd.Ex, { desc = "Reveal netrw file/directory explorer" })
 nnoremap("<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search hl on pressing <Esc> in normal mode" })
-nnoremap(";", ":", { desc = "Enter command mone" })
+nnoremap(";", ":", { desc = "Enter command mode" })
+inoremap("jk", "<Esc>", { desc = "Close insert mode" })
 
 -- Diagnostic keymaps
 nnoremap("[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
