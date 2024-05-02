@@ -52,7 +52,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 			--  All the info you're looking for is in `:help telescope.setup()`
 			--
 			defaults = {
-				winblend = 10,
+				-- winblend = 10,
 				inblend = 10,
 				borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
 				mappings = {

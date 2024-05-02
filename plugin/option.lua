@@ -39,3 +39,5 @@ vim.opt.cursorline = true
 vim.opt.colorcolumn = "100"
 
 vim.opt.scrolloff = 10
+
+vim.opt.laststatus = 3

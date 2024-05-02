@@ -27,6 +27,7 @@ end
 include_spec("lspconfig")
 -- include_spec("lspconfig.optional")
 include_spec("plugins")
+include_spec("colorscheme")
 
 require("config.lazy").init()
 require("config.lazy").setup(LAZY_PLUGIN_SPEC)
