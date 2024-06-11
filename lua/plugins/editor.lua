@@ -42,4 +42,6 @@ return {
 
 	-- Heuristically set buffer options
 	{ "tpope/vim-sleuth" },
+
+	{ "NvChad/nvim-colorizer.lua", opts = {} },
 }
