@@ -7,27 +7,12 @@
 --                            /_/                --
 ---------------------------------------------------
 
--- disable builtin plugins I dont use
-require("config.disable_builtin")
+require("config.disable_builtin") -- builtin plugins I don't use
+require("config.globals")
 
--- must happen before plugins are loaded (otherwise wrong leader will be used)
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
-vim.g.have_nerd_font = true
-
--- plugins specification table
-local LAZY_PLUGIN_SPEC = {}
-
-local function include_spec(item)
-	table.insert(LAZY_PLUGIN_SPEC, { import = item })
-end
-
--- include plugins
-include_spec("lspconfig")
--- include_spec("lspconfig.optional")
-include_spec("plugins")
-include_spec("colorscheme")
+Plug("lspconfig")
+-- Plug("lspconfig.optional")
+Plug("plugins")
+Plug("colors")
 
 require("config.lazy").init()
-require("config.lazy").setup(LAZY_PLUGIN_SPEC)
