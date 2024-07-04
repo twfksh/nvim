@@ -3,7 +3,7 @@ vim.g.maplocalleader = " "
 
 vim.g.have_nerd_font = true
 
--- plugins specification table
+-- plugin specification table
 LAZY_PLUGIN_SPEC = {}
 
 function Plug(item)

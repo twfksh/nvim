@@ -14,8 +14,6 @@ vim.opt.mouse = "a"
 
 vim.opt.showmode = false
 
-vim.opt.clipboard = "unnamed,unnamedplus"
-
 vim.opt.swapfile = false
 vim.opt.backup = false
 
@@ -38,6 +36,6 @@ vim.opt.cursorline = true
 
 vim.opt.colorcolumn = "100"
 
-vim.opt.scrolloff = 10
+vim.opt.scrolloff = 7
 
 vim.opt.laststatus = 3

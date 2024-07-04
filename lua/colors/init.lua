@@ -11,4 +11,5 @@ return {
 		version = "*",
 	},
 	{ "EdenEast/nightfox.nvim" },
+	{ "sainnhe/everforest" },
 }
