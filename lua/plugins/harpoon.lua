@@ -1,10 +1,10 @@
-local M = {
+local Plugin = {
   'ThePrimeagen/harpoon',
   branch = 'harpoon2',
   dependencies = { 'nvim-lua/plenary.nvim' },
 }
 
-M.config = function()
+Plugin.config = function()
   local harpoon = require 'harpoon'
   local nnoremap = require('config.utils').nnoremap
 
@@ -60,4 +60,4 @@ M.config = function()
   end, { desc = 'Toggle [h]arpoon' })
 end
 
-return M
+return Plugin

@@ -1,4 +1,4 @@
-return {
+local Plugins = {
   { -- autopairs
     'windwp/nvim-autopairs',
     event = 'InsertEnter',
@@ -30,3 +30,5 @@ return {
 
   { 'NvChad/nvim-colorizer.lua', event = 'BufEnter', opts = {} },
 }
+
+return Plugins

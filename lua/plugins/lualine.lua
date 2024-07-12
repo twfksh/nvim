@@ -1,10 +1,10 @@
-local M = {
+local Plugin = {
   'nvim-lualine/lualine.nvim',
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   opts = {},
 }
 
-M.config = function()
+Plugin.config = function()
   require('lualine').setup {
     options = {
       icons_enabled = true,
@@ -47,4 +47,4 @@ M.config = function()
   }
 end
 
-return M
+return Plugin
