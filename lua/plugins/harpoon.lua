@@ -6,7 +6,7 @@ local M = {
 
 M.config = function()
 	local harpoon = require("harpoon")
-	local nnoremap = require("config.keymap_utils").nnoremap
+	local nnoremap = require("config.utils").nnoremap
 
 	harpoon:setup()
 
@@ -28,6 +28,27 @@ M.config = function()
 			})
 			:find()
 	end
+
+	nnoremap("<C-h>", function()
+		harpoon:list():select(1)
+	end)
+	nnoremap("<C-t>", function()
+		harpoon:list():select(2)
+	end)
+	nnoremap("<C-n>", function()
+		harpoon:list():select(3)
+	end)
+	nnoremap("<C-s>", function()
+		harpoon:list():select(4)
+	end)
+
+	-- Toggle previous & next buffers stored within Harpoon list
+	nnoremap("<C-S-P>", function()
+		harpoon:list():prev()
+	end)
+	nnoremap("<C-S-N>", function()
+		harpoon:list():next()
+	end)
 
 	nnoremap("<s-m>", function()
 		harpoon:list():add()

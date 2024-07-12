@@ -18,30 +18,28 @@ return {
 		},
 	},
 
-	{ -- vscode like winbar for neovim
-		"utilyre/barbecue.nvim",
-		name = "barbecue",
-		version = "*",
-		dependencies = {
-			"SmiteshP/nvim-navic",
-			"nvim-tree/nvim-web-devicons", -- optional dependency
-		},
-		opts = {
-			-- configurations go here
-		},
-	},
+	--{ -- vscode like winbar for neovim
+	--	'utilyre/barbecue.nvim',
+	--	name = 'barbecue',
+	--	version = '*',
+	--	dependencies = {
+	--		'SmiteshP/nvim-navic',
+	--		'nvim-tree/nvim-web-devicons', -- optional dependency
+	--	},
+	--	opts = {
+	--		-- configurations go here
+	--	},
+	--},
 
 	{ -- Highlight todo, notes, etc in comments
 		"folke/todo-comments.nvim",
-		event = "VimEnter",
+		event = "BufEnter",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = { signs = false },
 	},
 
-	{ "tpope/vim-fugitive" },
-
 	-- Heuristically set buffer options
 	{ "tpope/vim-sleuth" },
 
-	{ "NvChad/nvim-colorizer.lua", opts = {} },
+	{ "NvChad/nvim-colorizer.lua", event = "BufEnter", opts = {} },
 }
