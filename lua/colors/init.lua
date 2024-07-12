@@ -1,11 +1,11 @@
 return {
-  "tjdevries/colorbuddy.nvim",
+  'tjdevries/colorbuddy.nvim',
   dependencies = {
-    { "echasnovski/mini.base16", version = "*" },
-    { "EdenEast/nightfox.nvim" },
-    { "sainnhe/everforest" },
+    { 'echasnovski/mini.base16', version = '*' },
+    { 'EdenEast/nightfox.nvim' },
+    { 'sainnhe/everforest' },
   },
-  config = function ()
-    vim.cmd[[colorscheme terafox]]
-  end
+  config = function()
+    vim.cmd [[colorscheme terafox]]
+  end,
 }

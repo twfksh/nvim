@@ -12,7 +12,7 @@ vim.g.netrw_winsize = 25
 vim.g.netrw_localrmdir = function(directory)
   local rmdir = require('config.utils').delete_directory
   rmdir(directory)
-  vim.cmd('redraw! | e.')
+  vim.cmd 'redraw! | e.'
 end
 
 -- plugin specification table

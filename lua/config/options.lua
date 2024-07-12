@@ -19,7 +19,7 @@ vim.opt.showmode = false
 
 -- allow plugins i.e. undotree to work well
 vim.opt.undofile = true
-vim.opt.undodir = os.getenv('HOME') .. '/.vim/undodir'
+vim.opt.undodir = os.getenv 'HOME' .. '/.vim/undodir'
 vim.opt.swapfile = false
 vim.opt.backup = false
 
