@@ -42,16 +42,13 @@ Neovim's configurations are located under the following paths, depending on your
 so that you have your own copy that you can modify, then install by cloning the
 fork to your machine using one of the commands below, depending on your OS.
 
-> **NOTE**
-> Your fork's url will be something like this:
-> `https://github.com/<your_github_username>/nvim.git`
 
 #### Clone nvim
 
 <details><summary> Linux and Mac </summary>
 
 ```sh
-git clone https://github.com/toufiq7r/nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
+git clone https://github.com/twfksh/nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
 ```
 
 </details>
@@ -61,13 +58,13 @@ git clone https://github.com/toufiq7r/nvim.git "${XDG_CONFIG_HOME:-$HOME/.config
 If you're using `cmd.exe`:
 
 ```
-git clone https://github.com/toufiq7r/nvim.git %userprofile%\AppData\Local\nvim\
+git clone https://github.com/twfksh/nvim.git %userprofile%\AppData\Local\nvim\
 ```
 
 If you're using `powershell.exe`
 
 ```
-git clone https://github.com/toufiq7r/nvim.git $env:USERPROFILE\AppData\Local\nvim\
+git clone https://github.com/twfksh/nvim.git $env:USERPROFILE\AppData\Local\nvim\
 ```
 
 </details>
