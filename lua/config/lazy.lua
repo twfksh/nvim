@@ -20,7 +20,10 @@ vim.keymap.set('n', '<leader>L', '<cmd>Lazy<cr>', { desc = 'Launch lazy.nvim plu
 require('lazy').setup {
   spec = LAZY_PLUGIN_SPEC,
   install = { colorscheme = { 'habamax' } },
-  checker = { enabled = true },
+  checker = {
+    enabled = true,
+    notify = false,
+  },
   change_detection = {
     enabled = true,
     notify = false,
