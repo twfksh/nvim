@@ -30,7 +30,6 @@ return {
         },
       }
     },
-    { 'xiyaowong/transparent.nvim' }
   },
   config = function()
     vim.cmd [[colorscheme terafox]]
