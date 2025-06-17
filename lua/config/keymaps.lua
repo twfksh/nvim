@@ -3,7 +3,7 @@ local inoremap = require('config.utils').inoremap
 local vnoremap = require('config.utils').vnoremap
 
 -- general keymaps
-nnoremap('-', vim.cmd.Ex, { desc = 'Reveal netrw file/directory explorer' })
+nnoremap('-', vim.cmd["Oil"], { desc = 'Reveal file/directory explorer' })
 nnoremap('<Esc>', '<cmd>nohlsearch<CR>', { desc = 'Clear search hl on pressing <Esc> in normal mode' })
 nnoremap(';', ':', { desc = 'Enter command mode' })
 inoremap('jk', '<Esc>', { desc = 'Close insert mode' })
