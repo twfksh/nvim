@@ -29,9 +29,10 @@ return {
           },
         },
       }
-    }
+    },
+    { 'xiyaowong/transparent.nvim' }
   },
   config = function()
-    vim.cmd [[colorscheme melange]]
+    vim.cmd [[colorscheme terafox]]
   end,
 }
