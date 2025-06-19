@@ -11,22 +11,26 @@ Plugin.config = function()
   harpoon:setup()
 
   local conf = require('telescope.config').values
-  local function toggle_telescope(harpoon_files)
+  local function toggle_telescope(harpoon_files, theme)
     local file_paths = {}
     for _, item in ipairs(harpoon_files.items) do
       table.insert(file_paths, item.value)
     end
 
-    require('telescope.pickers')
-      .new({}, {
-        prompt_title = 'Harpoon',
-        finder = require('telescope.finders').new_table {
-          results = file_paths,
-        },
-        previewer = conf.file_previewer {},
-        sorter = conf.generic_sorter {},
-      })
-      :find()
+    local picker_opts = {
+      prompt_title = 'Harpoon',
+      finder = require('telescope.finders').new_table {
+        results = file_paths,
+      },
+      previewer = conf.file_previewer {},
+      sorter = conf.generic_sorter {},
+    }
+
+    if theme then
+      picker_opts = vim.tbl_extend('force', picker_opts, theme)
+    end
+
+    require('telescope.pickers').new({}, picker_opts):find()
   end
 
   nnoremap('<C-h>', function()
@@ -56,7 +60,11 @@ Plugin.config = function()
   end)
 
   nnoremap('<leader>h', function()
-    toggle_telescope(harpoon:list())
+    toggle_telescope(harpoon:list(), require('telescope.themes').get_ivy {
+      layout_config = {
+        height = 0.5,
+      },
+    })
   end, { desc = 'Toggle [h]arpoon' })
 end
 
