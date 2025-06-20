@@ -47,21 +47,12 @@ return {
         vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
         vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
         vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
-        vim.keymap.set(
-          { 'n', 'x' },
-          '<F3>',
-          '<cmd>lua vim.lsp.buf.format({async = true})<cr>',
-          opts
-        )
+        vim.keymap.set({ 'n', 'x' }, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
         vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
       end
 
       local original_capabilities = vim.lsp.protocol.make_client_capabilities()
-      local capabilities = vim.tbl_deep_extend(
-        'force',
-        original_capabilities,
-        require('blink.cmp').get_lsp_capabilities({}, false)
-      )
+      local capabilities = vim.tbl_deep_extend('force', original_capabilities, require('blink.cmp').get_lsp_capabilities({}, false))
 
       lsp_zero.extend_lspconfig({
         sign_text = true,
@@ -84,12 +75,7 @@ return {
         on_init = function(client)
           if client.workspace_folders then
             local path = client.workspace_folders[1].name
-            if
-              path ~= vim.fn.stdpath('config')
-              and (
-                vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc')
-              )
-            then
+            if path ~= vim.fn.stdpath('config') and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc')) then
               return
             end
           end

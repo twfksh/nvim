@@ -55,6 +55,8 @@ local options = {
   showmatch = true, -- Show matching brackets when text indicator is over them
   mat = 2, -- How many tenths of a second to blink when matching brackets
   cursorline = true, -- highlight the current line
+  colorcolumn = '+1', -- highlights column after textwidth (80 + 1 here) to signal line length limit.
+  -- cmdheight = 0, -- hides command line when not in use
 
   -- Split options
   splitbelow = true, -- force all horizontal splits to go below current window

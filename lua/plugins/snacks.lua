@@ -26,7 +26,7 @@ return {
     input = { enabled = true },
     notifier = {
       enabled = true,
-      timeout = 3000,
+      timeout = 1500,
     },
     picker = { enabled = true },
     quickfile = { enabled = true },
@@ -57,7 +57,7 @@ return {
       desc = 'Buffers',
     },
     {
-      '<leader>/',
+      '<leader>;',
       function()
         Snacks.picker.grep()
       end,
@@ -83,14 +83,6 @@ return {
         Snacks.explorer()
       end,
       desc = 'File Explorer',
-    },
-    -- find
-    {
-      '<leader>B',
-      function()
-        Snacks.picker.buffers()
-      end,
-      desc = 'Buffers',
     },
     {
       '<leader>fc',
@@ -186,18 +178,11 @@ return {
       desc = 'Buffer Lines',
     },
     {
-      '<leader>sB',
+      '<leader>/',
       function()
         Snacks.picker.grep_buffers()
       end,
       desc = 'Grep Open Buffers',
-    },
-    {
-      '<leader>sg',
-      function()
-        Snacks.picker.grep()
-      end,
-      desc = 'Grep',
     },
     {
       '<leader>sw',
@@ -349,7 +334,7 @@ return {
       desc = 'Undo History',
     },
     {
-      '<leader>uC',
+      '<leader>oC',
       function()
         Snacks.picker.colorschemes()
       end,
@@ -415,13 +400,6 @@ return {
       desc = 'Toggle Zen Mode',
     },
     {
-      '<leader>Z',
-      function()
-        Snacks.zen.zoom()
-      end,
-      desc = 'Toggle Zoom',
-    },
-    {
       '<leader>.',
       function()
         Snacks.scratch()
@@ -450,13 +428,6 @@ return {
       desc = 'Delete Buffer',
     },
     {
-      '<leader>cR',
-      function()
-        Snacks.rename.rename_file()
-      end,
-      desc = 'Rename File',
-    },
-    {
       '<leader>gB',
       function()
         Snacks.gitbrowse()
@@ -472,7 +443,7 @@ return {
       desc = 'Lazygit',
     },
     {
-      '<leader>un',
+      '<leader>on',
       function()
         Snacks.notifier.hide()
       end,
@@ -508,24 +479,6 @@ return {
       desc = 'Prev Reference',
       mode = { 'n', 't' },
     },
-    {
-      '<leader>N',
-      desc = 'Neovim News',
-      function()
-        Snacks.win({
-          file = vim.api.nvim_get_runtime_file('doc/news.txt', false)[1],
-          width = 0.6,
-          height = 0.6,
-          wo = {
-            spell = false,
-            wrap = false,
-            signcolumn = 'yes',
-            statuscolumn = ' ',
-            conceallevel = 3,
-          },
-        })
-      end,
-    },
   },
   init = function()
     vim.api.nvim_create_autocmd('User', {
@@ -541,21 +494,17 @@ return {
         vim.print = _G.dd -- Override print to use snacks for `:=` command
 
         -- Create some toggle mappings
-        Snacks.toggle.option('spell', { name = 'Spelling' }):map('<leader>us')
-        Snacks.toggle.option('wrap', { name = 'Wrap' }):map('<leader>uw')
-        Snacks.toggle.option('relativenumber', { name = 'Relative Number' }):map('<leader>uL')
-        Snacks.toggle.diagnostics():map('<leader>ud')
-        Snacks.toggle.line_number():map('<leader>ul')
-        Snacks.toggle
-          .option('conceallevel', { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
-          :map('<leader>uc')
-        Snacks.toggle.treesitter():map('<leader>uT')
-        Snacks.toggle
-          .option('background', { off = 'light', on = 'dark', name = 'Dark Background' })
-          :map('<leader>ub')
-        Snacks.toggle.inlay_hints():map('<leader>uh')
-        Snacks.toggle.indent():map('<leader>ug')
-        Snacks.toggle.dim():map('<leader>uD')
+        Snacks.toggle.option('spell', { name = 'Spelling' }):map('<leader>os')
+        Snacks.toggle.option('wrap', { name = 'Wrap' }):map('<leader>ow')
+        Snacks.toggle.option('relativenumber', { name = 'Relative Number' }):map('<leader>oL')
+        Snacks.toggle.diagnostics():map('<leader>od')
+        Snacks.toggle.line_number():map('<leader>ol')
+        Snacks.toggle.option('conceallevel', { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map('<leader>oc')
+        Snacks.toggle.treesitter():map('<leader>oT')
+        Snacks.toggle.option('background', { off = 'light', on = 'dark', name = 'Dark Background' }):map('<leader>ob')
+        Snacks.toggle.inlay_hints():map('<leader>oh')
+        Snacks.toggle.indent():map('<leader>og')
+        Snacks.toggle.dim():map('<leader>oD')
       end,
     })
   end,
