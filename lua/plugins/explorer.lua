@@ -1,19 +1,35 @@
+---@type LazySpec
 return {
-  'stevearc/oil.nvim',
-  ---@module 'oil'
-  ---@type oil.SetupOpts
-  opts = {},
-  -- Optional dependencies
-  -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
-  -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
-  lazy = false,
-  config = function()
-    require('oil').setup({
-      columns = {},
-      view_options = {
-        show_hidden = true,
-      },
-    })
-    require('utils.shared').nnoremap('-', vim.cmd['Oil'], { desc = 'Reveal file/directory explorer' })
+  'mikavilpas/yazi.nvim',
+  event = 'VeryLazy',
+  dependencies = {
+    'folke/snacks.nvim',
+  },
+  keys = {
+    {
+      '-',
+      mode = { 'n', 'v' },
+      '<cmd>Yazi<cr>',
+      desc = 'Open yazi at the current file',
+    },
+    {
+      '_',
+      '<cmd>Yazi cwd<cr>',
+      desc = "Open the file manager in nvim's working directory",
+    },
+    {
+      '<c-up>',
+      '<cmd>Yazi toggle<cr>',
+      desc = 'Resume the last yazi session',
+    },
+  },
+  ---@type YaziConfig | {}
+  opts = {
+    open_for_directories = true,
+  },
+  init = function()
+    -- More details: https://github.com/mikavilpas/yazi.nvim/issues/802
+    -- vim.g.loaded_netrw = 1
+    vim.g.loaded_netrwPlugin = 1
   end,
 }
