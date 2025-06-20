@@ -10,6 +10,7 @@ plug('plugins.explorer')
 plug('plugins.lspconfig')
 plug('plugins.autoformat')
 plug('plugins.snacks')
+plug('plugins.statusline')
 plug('plugins.whichkey')
 
 -- necessary to bootstrap lazy.nvim
@@ -57,16 +58,20 @@ require('lazy').setup({
     notify = false, -- notify on update
   }, -- automatically check for plugin updates
   performance = {
+    cache = { enabled = true },
+    reset_packpath = true,
     rtp = {
       -- disable some rtp plugins
       disabled_plugins = {
+        '2html_plugin',
         'gzip',
-        -- "matchit",
+        'matchit',
         -- "matchparen",
         'netrwPlugin',
         'tarPlugin',
         'tohtml',
         'tutor',
+        'zip',
         'zipPlugin',
       },
     },
