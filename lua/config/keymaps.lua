@@ -1,15 +1,20 @@
 local nnoremap = require('utils.shared').nnoremap
+local xnoremap = require('utils.shared').xnoremap
 local inoremap = require('utils.shared').inoremap
 local vnoremap = require('utils.shared').vnoremap
 
 -- general keymaps
-nnoremap(
-  '<Esc>',
-  '<cmd>nohlsearch<CR>',
-  { desc = 'Clear search hl on pressing <Esc> in normal mode' }
-)
+nnoremap('<Esc>', '<cmd>nohlsearch<CR>', { desc = 'Clear search hl on pressing <Esc> in normal mode' })
 nnoremap(';', ':', { desc = 'Enter command mode' })
 inoremap('jk', '<Esc>', { desc = 'Close insert mode' })
+
+nnoremap('<C-d>', '<C-d>zz')
+nnoremap('<C-u>', '<C-u>zz')
+
+-- Disable 's' in normal and visual modes
+nnoremap('s', '<Nop>')
+xnoremap('s', '<Nop>')
+nnoremap('S', '<Nop>')
 
 -- some fun register stuff
 -- vnoremap('<leader>y', '"+y')
