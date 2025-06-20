@@ -9,7 +9,7 @@ end
 plug('plugins')
 -- plug('plugins.ai')
 -- plug('plugins.dap')
--- plug('plugins.extra')
+-- plug('plugins.extras')
 plug('plugins.lsp')
 
 -- necessary to bootstrap lazy.nvim
