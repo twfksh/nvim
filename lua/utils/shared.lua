@@ -10,18 +10,18 @@ local function bind(op, outer_opts)
   end
 end
 
-M.map = bind ''
+M.map = bind('')
 M.nmap = bind('n', { noremap = false })
-M.nnoremap = bind 'n'
-M.vnoremap = bind 'v'
-M.xnoremap = bind 'x'
-M.inoremap = bind 'i'
-M.tnoremap = bind 't'
+M.nnoremap = bind('n')
+M.vnoremap = bind('v')
+M.xnoremap = bind('x')
+M.inoremap = bind('i')
+M.tnoremap = bind('t')
 
 -- git utils
 M.is_git_directory = function()
-  local result = vim.fn.system 'git rev-parse --is-inside-work-tree'
-  if vim.v.shell_error == 0 and result:find 'true' then
+  local result = vim.fn.system('git rev-parse --is-inside-work-tree')
+  if vim.v.shell_error == 0 and result:find('true') then
     return true
   else
     return false

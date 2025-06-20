@@ -5,13 +5,12 @@ local plug = function(item)
   table.insert(plugin_specs, { import = item })
 end
 
-plug('plugins.colors')
-plug('plugins.explorer')
-plug('plugins.lspconfig')
-plug('plugins.autoformat')
-plug('plugins.snacks')
-plug('plugins.statusline')
-plug('plugins.whichkey')
+-- add or remove plugins
+plug('plugins')
+-- plug('plugins.ai')
+-- plug('plugins.dap')
+-- plug('plugins.extra')
+plug('plugins.lsp')
 
 -- necessary to bootstrap lazy.nvim
 vim.g.mapleader = ' '

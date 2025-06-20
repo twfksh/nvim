@@ -1,5 +1,7 @@
 return {
   'tjdevries/colorbuddy.nvim',
+  lazy = true,
+  cmd = 'Colorscheme',
   dependencies = {
     { 'EdenEast/nightfox.nvim' },
     { 'rebelot/kanagawa.nvim' },
@@ -7,7 +9,4 @@ return {
     { 'savq/melange-nvim' },
     { 'everviolet/nvim', name = 'evergarden' },
   },
-  config = function()
-    vim.cmd([[colorscheme terafox]])
-  end,
 }
