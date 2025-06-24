@@ -8,7 +8,7 @@ end
 -- add or remove plugins
 plug('plugins.editor')
 -- plug('plugins.extras')
--- plug('plugins.extras.ai')
+plug('plugins.extras.ai.github-copilot')
 -- plug('plugins.extras.dap')
 plug('plugins.lsp')
 
@@ -38,7 +38,7 @@ vim.g.maplocalleader = '\\'
 -- Setup lazy.nvim
 require('lazy').setup({
   spec = { plugin_specs },
-  defaults = { lazy = true, version = false },
+  defaults = { lazy = false, version = false },
   install = { colorscheme = { 'habamax' } },
   checker = {
     enabled = true, -- check for plugin updates periodically

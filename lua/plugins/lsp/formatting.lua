@@ -40,20 +40,19 @@ return {
   init = function()
     vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
-    local format = require('conform').format
     local nnoremap = require('utils.shared').nnoremap
     local vnoremap = require('utils.shared').vnoremap
 
     nnoremap('<leader>cf', function()
-      format({ async = true })
+      require('conform').format({ async = true })
     end, { desc = 'Format buffer' })
 
     vnoremap('<leader>cf', function()
-      format({ async = true, range = true })
+      require('conform').format({ async = true, range = true })
     end, { desc = 'Format selection (Conform)' })
 
     nnoremap('<leader>cF', function()
-      format({ async = true, lsp_fallback = true })
+      require('conform').format({ async = true, lsp_fallback = true })
     end, { desc = 'Format buffer (with LSP fallback)' })
 
     nnoremap('<leader>ct', function()

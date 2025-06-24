@@ -1,6 +1,6 @@
-vim.opt.wildignore:append({ '*/node_modules/*' })
-vim.g.clipboard = 'osc52'
--- vim.o.winborder = "rounded"
+vim.opt.wildignore:append({ '*/node_modules/*', '*/.git/*', '*/.venv/*' })
+-- vim.g.clipboard = 'osc52'
+-- vim.o.winborder = 'rounded'
 vim.g.have_nerd_font = true
 
 local backup_dir = vim.fn.stdpath('data') .. '/backup'
@@ -9,17 +9,13 @@ local options = {
   autoindent = true,
 
   guicursor = '',
-  mouse = 'a', -- allow the mouse to be used in neovim
+  mouse = 'a',
 
   number = true,
   numberwidth = 3,
   relativenumber = true,
 
-  -- clipboard = 'unnamed,unnamedplus',
-
-  conceallevel = 0, -- so that `` is visible in markdown files
-
-  cursorline = true, -- highlight the current line
+  cursorline = true,
 
   fillchars = {
     foldopen = '',
@@ -31,16 +27,16 @@ local options = {
     eob = ' ',
   },
 
-  hlsearch = true, -- highlight all matches on previous search pattern
-  incsearch = true, -- incremental search that shows partial matches.
-  ignorecase = true, -- ignore case in search patterns
+  hlsearch = true,
+  incsearch = true,
+  ignorecase = true,
 
   list = false,
   listchars = { eol = '↲', tab = '▸ ', trail = '·' },
 
   showbreak = '↪',
 
-  smartcase = true, -- switch to case sensitive if we use uppercase letters smart case
+  smartcase = true,
 
   smartindent = true,
 
@@ -50,10 +46,10 @@ local options = {
   splitbelow = true,
   splitright = true,
 
-  tabstop = 2, -- insert 2 spaces for a tab
+  tabstop = 2,
   softtabstop = 2,
-  shiftwidth = 2, -- the number of spaces inserted for each indentation
-  expandtab = true, -- convert tabs to spaces
+  shiftwidth = 2,
+  expandtab = true,
   smarttab = true,
 
   swapfile = false,
@@ -71,8 +67,8 @@ local options = {
 
   updatetime = 50,
 
-  colorcolumn = '+1', -- highlights column after textwidth (80 + 1 here) to signal line length limit.
-  laststatus = 3, -- when to have a status line (options from 0-3) 2 default
+  colorcolumn = '+1',
+  laststatus = 3,
 }
 
 for k, v in pairs(options) do

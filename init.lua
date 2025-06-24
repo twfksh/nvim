@@ -3,4 +3,3 @@ if vim.loader then
 end
 
 require('bootstrap') -- bootstrap lazy.nvim
-
