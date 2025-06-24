@@ -1,31 +1,42 @@
 return {
   {
-    'neovim/nvim-lspconfig',
-    event = 'InsertEnter',
+    'mason-org/mason-lspconfig.nvim',
+    event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
       { 'mason-org/mason.nvim', opts = {} },
-      'mason-org/mason-lspconfig.nvim',
+      'neovim/nvim-lspconfig',
       'saghen/blink.cmp',
     },
     config = function()
-      local on_attach = function(_, bufnr)
-        local opts = { buffer = bufnr }
-        vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-        vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+      local symbols = { Error = '󰅙 ', Info = '󰋼 ', Hint = '󰌵 ', Warn = ' ' }
+      for name, icon in pairs(symbols) do
+        local hl = 'DiagnosticSign' .. name
+        vim.fn.sign_define(hl, { text = icon, numhl = hl, texthl = hl })
       end
 
       require('mason-lspconfig').setup({
-        ensure_installed = { 'lua_ls' },
+        ensure_installed = {
+          'bashls',
+          'clangd',
+          'dockerls',
+          -- 'gopls',
+          'html',
+          'jsonls',
+          'marksman',
+          'pyright',
+          'ruff',
+          'rust_analyzer',
+          'yamlls',
+        },
         handlers = {
-          function(server)
-            require('lspconfig')[server].setup({
-              on_attach = on_attach,
-              capabilities = vim.tbl_deep_extend('force', vim.lsp.protocol.make_client_capabilities(), require('blink.cmp').get_lsp_capabilities()),
-            })
+          function(server_name)
+            require('lspconfig')[server_name].setup({})
           end,
         },
       })
+
+      vim.keymap.set('n', '<leader>i', '<cmd>LspInfo<cr>', opts)
+      vim.keymap.set('n', '<leader>I', '<cmd>LspInstall<cr>', opts)
     end,
   },
 }

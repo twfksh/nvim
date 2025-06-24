@@ -63,7 +63,7 @@ local options = {
 
   scrolloff = 8,
   sidescrolloff = 10,
-  signcolumn = 'yes:3',
+  signcolumn = 'yes',
 
   updatetime = 50,
 
