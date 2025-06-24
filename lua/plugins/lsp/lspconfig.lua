@@ -20,10 +20,20 @@ return {
     },
     config = function()
       local symbols = { Error = '󰅙 ', Info = '󰋼 ', Hint = '󰌵 ', Warn = ' ' }
-      for name, icon in pairs(symbols) do
-        local hl = 'DiagnosticSign' .. name
-        vim.fn.sign_define(hl, { text = icon, numhl = hl, texthl = hl })
-      end
+      vim.diagnostic.config({
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = symbols.Error,
+            [vim.diagnostic.severity.WARN] = symbols.Warn,
+            [vim.diagnostic.severity.HINT] = symbols.Hint,
+            [vim.diagnostic.severity.INFO] = symbols.Info,
+          },
+        },
+        underline = true,
+        virtual_text = true,
+        update_in_insert = false,
+        severity_sort = true,
+      })
 
       require('mason-lspconfig').setup({
         ensure_installed = {
@@ -46,8 +56,8 @@ return {
         },
       })
 
-      vim.keymap.set('n', '<leader>i', '<cmd>LspInfo<cr>', opts)
-      vim.keymap.set('n', '<leader>I', '<cmd>LspInstall<cr>', opts)
+      vim.keymap.set('n', '<leader>i', '<cmd>LspInfo<cr>', { desc = 'LSP Info' })
+      vim.keymap.set('n', '<leader>I', '<cmd>LspInstall<cr>', { desc = 'LSP Install' })
     end,
   },
 }

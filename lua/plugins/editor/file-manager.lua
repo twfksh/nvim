@@ -1,4 +1,3 @@
----@type LazySpec
 return {
   'mikavilpas/yazi.nvim',
   event = 'VeryLazy',
@@ -23,7 +22,6 @@ return {
       desc = 'Resume the last yazi session',
     },
   },
-  ---@type YaziConfig | {}
   opts = {
     open_for_directories = true,
   },
