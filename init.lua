@@ -1,15 +1,1 @@
-local lazy = require('config.lazy')
-
-lazy.plug('plugins.colors')
-lazy.plug('plugins.completion')
-lazy.plug('plugins.explorer')
-lazy.plug('plugins.formatting')
-lazy.plug('plugins.lspconfig')
-lazy.plug('plugins.markview')
-lazy.plug('plugins.qualitylife')
-lazy.plug('plugins.smear-cursor')
-lazy.plug('plugins.snacks')
-lazy.plug('plugins.statusline')
-lazy.plug('plugins.treesitter')
-
-lazy.init()
+require('config.lazy').load("plugins")

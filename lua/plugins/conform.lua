@@ -37,8 +37,8 @@ return {
   init = function()
     vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
-    local nnoremap = require('utils.shared').nnoremap
-    local vnoremap = require('utils.shared').vnoremap
+    local nnoremap = require('utils').nnoremap
+    local vnoremap = require('utils').vnoremap
 
     nnoremap('<leader>cf', function()
       require('conform').format({ async = true })

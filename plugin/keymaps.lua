@@ -1,7 +1,7 @@
-local nnoremap = require('utils.shared').nnoremap
-local xnoremap = require('utils.shared').xnoremap
-local inoremap = require('utils.shared').inoremap
-local vnoremap = require('utils.shared').vnoremap
+local nnoremap = require('utils').nnoremap
+local xnoremap = require('utils').xnoremap
+local inoremap = require('utils').inoremap
+local vnoremap = require('utils').vnoremap
 
 -- general keymaps
 nnoremap('<Esc>', '<cmd>nohlsearch<CR>', { desc = 'Clear search hl on pressing <Esc> in normal mode' })

@@ -3,20 +3,9 @@ local M = {}
 -- Plugin specification table
 M.PLUGIN_SPEC = {}
 
--- Function to register a plugin specification
-function M.plug(spec_path)
-  local ok, spec = pcall(require, spec_path)
-  if not ok then
-    vim.notify('Failed to load plugin spec: ' .. spec_path, vim.log.levels.ERROR)
-    return
-  end
-
-  -- If spec is a table, merge it into PLUGIN_SPEC
-  if type(spec) == 'table' then
-    table.insert(M.PLUGIN_SPEC, spec)
-  else
-    vim.notify('Plugin spec must return a table: ' .. spec_path, vim.log.levels.WARN)
-  end
+-- Function to register plugin specification
+function M.plug(spec)
+  table.insert(M.PLUGIN_SPEC, { import = spec })
 end
 
 -- Lazy.nvim initialization
@@ -29,7 +18,7 @@ function M.init()
     if vim.v.shell_error ~= 0 then
       vim.api.nvim_echo({
         { 'Failed to clone lazy.nvim:\n', 'ErrorMsg' },
-        { out, 'WarningMsg' },
+        { out,                            'WarningMsg' },
         { '\nPress any key to exit...' },
       }, true, {})
       vim.fn.getchar()
@@ -81,6 +70,12 @@ function M.init()
       },
     },
   })
+end
+
+-- Helper function to load plugins
+function M.load(spec)
+  M.plug(spec)
+  M.init()
 end
 
 -- Helper function to get all loaded plugins

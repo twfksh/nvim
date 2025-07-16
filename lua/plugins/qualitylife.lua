@@ -1,6 +1,6 @@
 return {
   'tpope/vim-surround',
-  { 'echasnovski/mini.pairs', version = false, opts = {} },
+  { 'echasnovski/mini.pairs',       version = false, opts = {} },
   {
     'folke/which-key.nvim',
     event = 'VeryLazy',

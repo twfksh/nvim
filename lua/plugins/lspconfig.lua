@@ -1,115 +1,102 @@
-local LSPConf = {
-  {
-    'VonHeikemen/lsp-zero.nvim',
-    branch = 'v4.x',
-    lazy = true,
-    config = false,
+return {
+  "mason-org/mason-lspconfig.nvim",
+  event = "VeryLazy",
+  dependencies = {
+    { "mason-org/mason.nvim", opts = {} },
+    "neovim/nvim-lspconfig",
+    "saghen/blink.cmp",
   },
-  {
-    'williamboman/mason.nvim',
-    lazy = false,
-    config = true,
-  },
+  config = function()
+    local lspconfig = require("lspconfig")
+    local capabilities = require("blink.cmp").get_lsp_capabilities()
 
-  -- Auto-Complete
-  {
-    'saghen/blink.cmp',
-    dependencies = {
-      { 'rafamadriz/friendly-snippets' },
-    },
-    version = '1.*',
-    opts = {
-      keymap = { preset = 'super-tab' },
-    },
-  },
+    require("mason-lspconfig").setup {
+      ensure_installed = {
+        "bashls",
+        "clangd",
+        "cssls",
+        "eslint",
+        "gopls",
+        "html",
+        -- "htmx",
+        "intelephense",
+        "jsonls",
+        "emmet_language_server",
+        "lua_ls",
+        "marksman",
+        "pylsp",
+        "rust_analyzer",
+        "sqlls",
+        "tailwindcss",
+        "texlab",
+        "ts_ls",
+        -- "tsserver",
+        "zls",
+      },
+      handlers = function(server_name)
+        require("lspconfig")[server_name].setup({
+          capabilities = capabilities
+        })
+      end,
+    }
 
-  -- LSP
-  {
-    'neovim/nvim-lspconfig',
-    cmd = { 'LspInfo', 'LspInstall', 'LspStart' },
-    event = { 'BufReadPre', 'BufNewFile' },
-    dependencies = {
-      { 'saghen/blink.cmp' },
-      { 'williamboman/mason.nvim' },
-      { 'williamboman/mason-lspconfig.nvim' },
-    },
-    config = function()
-      local lsp_zero = require('lsp-zero')
-
-      local original_capabilities = vim.lsp.protocol.make_client_capabilities()
-      local capabilities = vim.tbl_deep_extend('force', original_capabilities, require('blink.cmp').get_lsp_capabilities({}, false))
-
-      -- lsp_attach is where you enable features that only work
-      -- if there is a language server active in the file
-      local lsp_attach = function(client, bufnr)
-        local opts = { buffer = bufnr }
-        vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
-        -- vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
-        -- vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
-        -- vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
-        -- vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
-        -- vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
-        -- vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
-        vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
-        vim.keymap.set({ 'n', 'x' }, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
-        vim.keymap.set('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<cr>', { desc = 'Perform code actions' })
+    local function get_python_path()
+      -- Check if there's an active virtual environment
+      local venv_path = os.getenv("VIRTUAL_ENV")
+      if venv_path then
+        return venv_path .. "/bin/python3"
+      else
+        -- get os name
+        local os_name = require("utils").get_os()
+        -- get os interpreter path
+        if os_name == "windows" then
+          return "C:/python312" -- TODO: may need to modify
+        elseif os_name == "linux" then
+          return "/usr/bin/python3"
+        elseif os_name == "mac" then
+          return "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3"
+        end
+        -- Fallback to global Python interpreter
       end
+    end
 
-      lsp_zero.extend_lspconfig({
-        sign_text = true,
-        lsp_attach = lsp_attach,
-        capabilities = capabilities,
-      })
-
-      require('mason-lspconfig').setup({
-        ensure_installed = { 'lua_ls' },
-        handlers = {
-          -- this first function is the "default handler"
-          -- it applies to every language server without a "custom handler"
-          function(server_name)
-            require('lspconfig')[server_name].setup({})
-          end,
+    lspconfig.gopls.setup({
+      capabilities = capabilities,
+      settings = {
+        gopls = {
+          gofumpt = true,
         },
-      })
+      },
+    })
 
-      vim.lsp.config('lua_ls', {
-        on_init = function(client)
-          if client.workspace_folders then
-            local path = client.workspace_folders[1].name
-            if path ~= vim.fn.stdpath('config') and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc')) then
-              return
-            end
-          end
-
-          client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
-            runtime = {
-              version = 'LuaJIT',
-              path = {
-                'lua/?.lua',
-                'lua/?/init.lua',
-              },
-            },
-            workspace = {
-              checkThirdParty = false,
-              library = {
-                vim.env.VIMRUNTIME,
-                -- Depending on the usage, you might want to add additional paths
-                -- here.
-                -- '${3rd}/luv/library'
-                -- '${3rd}/busted/library'
-              },
-            },
-          })
-        end,
-        settings = {
-          Lua = {},
+    lspconfig.lua_ls.setup({
+      capabilities = capabilities,
+      settings = {
+        Lua = {
+          runtime = {
+            version = 'LuaJIT',
+          },
+          diagnostics = {
+            globals = { 'vim' },
+          },
+          workspace = {
+            library = vim.api.nvim_get_runtime_file("", true),
+            checkThirdParty = false,
+          },
+          telemetry = {
+            enable = false,
+          },
         },
-      })
+      },
+    })
 
-      vim.keymap.set('n', '<leader>i', '<cmd>LspInfo<cr>')
-      vim.keymap.set('n', '<leader>I', '<cmd>LspInstall<cr>')
-    end,
-  },
+    lspconfig.pylsp.setup({
+      capabilties = capabilities,
+      settings = {
+        python = {
+          pythonPath = get_python_path(),
+        },
+      },
+    })
+  end
 }
-
-return LSPConf

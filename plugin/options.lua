@@ -1,6 +1,6 @@
 vim.opt.wildignore:append({ '*/node_modules/*', '*/.git/*', '*/.venv/*' })
 -- vim.g.clipboard = 'osc52'
--- vim.o.winborder = 'rounded'
+vim.o.winborder = 'rounded'
 vim.g.have_nerd_font = true
 
 local options = {
