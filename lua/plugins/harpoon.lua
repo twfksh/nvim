@@ -1,12 +1,12 @@
 local Plugin = {
   'ThePrimeagen/harpoon',
   branch = 'harpoon2',
+  event = 'BufEnter',
   dependencies = { 'nvim-lua/plenary.nvim' },
 }
 
 Plugin.config = function()
   local harpoon = require 'harpoon'
-  local nnoremap = require('config.utils').nnoremap
 
   harpoon:setup()
 

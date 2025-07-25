@@ -1,9 +1,4 @@
-local nnoremap = require('config.utils').nnoremap
-local inoremap = require('config.utils').inoremap
-local vnoremap = require('config.utils').vnoremap
-
 -- general keymaps
-nnoremap('-', vim.cmd["Oil"], { desc = 'Reveal file/directory explorer' })
 nnoremap('<Esc>', '<cmd>nohlsearch<CR>', { desc = 'Clear search hl on pressing <Esc> in normal mode' })
 nnoremap(';', ':', { desc = 'Enter command mode' })
 inoremap('jk', '<Esc>', { desc = 'Close insert mode' })
@@ -16,21 +11,12 @@ inoremap('jk', '<Esc>', { desc = 'Close insert mode' })
 --vnoremap("<leader>p", '"_dP')
 
 -- tmux stuff
-nnoremap('<C-f>', ':silent !tmux neww ~/.local/bin/tmux-sessionizer<CR>')
-
+--nnoremap('<C-f>', ':silent !tmux neww ~/.local/bin/tmux-sessionizer<CR>')
 -- open new tumx window in the current directory
-nnoremap('<leader>tnw', function()
-  local currentDir = vim.uv.cwd()
-  vim.cmd('silent !tmux neww -c ' .. currentDir)
-end)
-
--- terminal stuff
-nnoremap('<C-\\>', function()
-  vim.cmd 'belowright 12split'
-  vim.cmd 'set winfixheight'
-  vim.cmd 'term'
-  vim.cmd 'startinsert'
-end)
+--nnoremap('<leader>tnw', function()
+--  local currentDir = vim.uv.cwd()
+--  vim.cmd('silent !tmux neww -c ' .. currentDir)
+--end)
 
 -- move stuff up and down in visual mode
 vnoremap('J', ":m '>+1<CR>gv=gv")
