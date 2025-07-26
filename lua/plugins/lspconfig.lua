@@ -1,25 +1,41 @@
 return {
   "neovim/nvim-lspconfig",
+  event = { "BufReadPre", "BufNewFile" },
   dependencies = {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
-    "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/cmp-buffer",
-    "hrsh7th/cmp-path",
-    "hrsh7th/cmp-cmdline",
-    "hrsh7th/nvim-cmp",
-    "L3MON4D3/LuaSnip",
-    "saadparwaiz1/cmp_luasnip",
+    {
+      'saghen/blink.cmp',
+      dependencies = { 'rafamadriz/friendly-snippets' },
+      version = '1.*',
+      opts = {
+        keymap = { preset = 'default' },
+        appearance = {
+          nerd_font_variant = 'mono'
+        },
+        completion = { documentation = { auto_show = false } },
+        sources = {
+          default = { 'lsp', 'path', 'snippets', 'buffer' },
+        },
+        fuzzy = { implementation = "prefer_rust_with_warning" }
+      },
+      opts_extend = { "sources.default" }
+    }
   },
 
   config = function()
-    local cmp = require('cmp')
-    local cmp_lsp = require("cmp_nvim_lsp")
-    local capabilities = vim.tbl_deep_extend(
-      "force",
-      {},
-      vim.lsp.protocol.make_client_capabilities(),
-      cmp_lsp.default_capabilities())
+    local lspconfig = require("lspconfig")
+    local blink_cmp_capabilities = require("blink.cmp").get_lsp_capabilities()
+    local client_capabilities = vim.lsp.protocol.make_client_capabilities()
+    local capabilities = vim.tbl_deep_extend("force", {}, client_capabilities, blink_cmp_capabilities)
+
+    local on_attach = function(client, bufnr)
+      -- Your keymaps and other on_attach logic here
+      nnoremap('gd', vim.lsp.buf.definition, { buffer = bufnr })
+      --nnoremap('K', vim.lsp.buf.hover, { buffer = bufnr })
+      nnoremap('<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr })
+      nnoremap('<leader>rn', vim.lsp.buf.rename, { buffer = bufnr })
+    end
 
     require("mason").setup()
     require("mason-lspconfig").setup({
@@ -28,19 +44,20 @@ return {
         "clangd",
         "lua_ls",
         "rust_analyzer",
-        "tsserver",
+        "ts_ls"
       },
       handlers = {
         function(server_name) -- default handler (optional)
           require("lspconfig")[server_name].setup {
-            capabilities = capabilities
+            capabilities = capabilities,
+            on_attach = on_attach,
           }
         end,
 
         ["lua_ls"] = function()
-          local lspconfig = require("lspconfig")
           lspconfig.lua_ls.setup {
             capabilities = capabilities,
+            on_attach = on_attach,
             settings = {
               Lua = {
                 runtime = {
@@ -54,28 +71,6 @@ return {
           }
         end,
       }
-    })
-
-    local cmp_select = { behavior = cmp.SelectBehavior.Select }
-
-    cmp.setup({
-      snippet = {
-        expand = function(args)
-          require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-        end,
-      },
-      mapping = cmp.mapping.preset.insert({
-        ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-        ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-        ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-        ["<C-Space>"] = cmp.mapping.complete(),
-      }),
-      sources = cmp.config.sources({
-        { name = 'nvim_lsp' },
-        { name = 'luasnip' }, -- For luasnip users.
-      }, {
-        { name = 'buffer' },
-      })
     })
 
     vim.diagnostic.config({
