@@ -1,5 +1,0 @@
-require 'twfksh.disable_builtins'
-require 'twfksh.globals'
-require 'twfksh.utils'
-Plug 'plugins'
-require 'twfksh.lazy'

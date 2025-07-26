@@ -1,16 +1,13 @@
 return {
-  'tjdevries/colorbuddy.nvim',
-  dependencies = {
-    { 'echasnovski/mini.base16',  version = '*' },
-    { 'EdenEast/nightfox.nvim' },
-    { 'sainnhe/everforest' },
-    { 'rebelot/kanagawa.nvim' },
-    { "rose-pine/neovim",         name = "rose-pine" },
-    { "ellisonleao/gruvbox.nvim", priority = 1000,     config = true,  opts = ... },
-    { "savq/melange-nvim" },
-    { 'everviolet/nvim',          name = 'evergarden', priority = 1000 },
+  { 'EdenEast/nightfox.nvim',   event = 'VeryLazy' },
+  { "rose-pine/neovim",         event = 'VeryLazy', name = "rose-pine" },
+  { "ellisonleao/gruvbox.nvim", event = 'VeryLazy', config = true,     opts = ... },
+  {
+    'maxmx03/solarized.nvim',
+    opts = {},
+    config = function(_, opts)
+      require('solarized').setup(opts)
+      vim.cmd [[colorscheme solarized]]
+    end,
   },
-  config = function()
-    vim.cmd [[colorscheme predawn]]
-  end,
 }

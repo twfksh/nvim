@@ -1,3 +1,5 @@
+require 'twfksh.utils'
+
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -10,7 +12,7 @@ vim.g.netrw_winsize = 25
 
 -- override netrw's directory delete command with the custom function
 vim.g.netrw_localrmdir = function(directory)
-  local rmdir = require('config.utils').delete_directory
+  local rmdir = delete_directory
   rmdir(directory)
   vim.cmd 'redraw! | e.'
 end
